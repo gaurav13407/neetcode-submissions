@@ -2,15 +2,13 @@ class Solution {
 public:
     bool isAnagram(string s, string t) {
         if (s.size() != t.size()) return false;
-        int hash[26] = {0};
+        unordered_map<char,int> mpp;
         for(int i=0;i<s.size();i++){
-            hash[s[i]-'a']++;
+            mpp[s[i]]++;
+            mpp[t[i]]--;
         }
-        for(int i=0;i<t.size();i++){
-            hash[t[i]-'a']--;
-        }
-        for(int i=0;i<26;i++){
-            if(hash[i]!=0) return false;
+        for(auto &it:mpp){
+            if(it.second!=0) return false;
         }
         return true;
     }

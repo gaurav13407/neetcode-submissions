@@ -2,27 +2,25 @@ class Solution {
 public:
 
     string encode(vector<string>& strs) {
-        string s;
-        for(string st:strs){
-            s+=to_string(st.size())+'#'+st;
+        string res;
+        for (const string& s : strs) {
+            res += to_string(s.size()) + "#" + s;
         }
-        return s;
+        return res;
     }
 
     vector<string> decode(string s) {
-        vector<string>ans;
-        int i=0;
-        int j;
-        while(i<s.size()){
-            j=i;
-            while(s[j]!='#'){
+        vector<string> res;
+        int i = 0;
+        while (i < s.size()) {
+            int j = i;
+            while (s[j] != '#') {
                 j++;
             }
-            int len=stoi(s.substr(i,j-i));
-            string word=s.substr(j+1,len);
-            ans.push_back(word);
-            i=j+1+len;
+            int length = stoi(s.substr(i, j - i));
+            res.push_back(s.substr(j + 1, length));
+            i = j + 1 + length;
         }
-        return ans;
+        return res;
     }
 };

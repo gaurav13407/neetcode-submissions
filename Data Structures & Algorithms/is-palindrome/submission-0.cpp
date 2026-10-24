@@ -1,16 +1,26 @@
 class Solution {
 public:
     bool isPalindrome(string s) {
-        transform(s.begin(), s.end(), s.begin(), ::tolower);
-        int i=0;
-        int j=s.size()-1;
-        while(i<=j){
-            while (i<j && !isalnum(s[i])) i++;
-            while (i<j && !isalnum(s[j])) j--;
-            if(s[i]!=s[j]) return false;
-            i++;
-            j--;
+        int left = 0;
+        int right = static_cast<int>(s.size()) - 1;
+
+        while (left < right) {
+            while (left < right && !isalnum(static_cast<unsigned char>(s[left]))) {
+                ++left;
+            }
+            while (left < right && !isalnum(static_cast<unsigned char>(s[right]))) {
+                --right;
+            }
+
+            if (tolower(static_cast<unsigned char>(s[left])) !=
+                tolower(static_cast<unsigned char>(s[right]))) {
+                return false;
+            }
+
+            ++left;
+            --right;
         }
+
         return true;
     }
 };
